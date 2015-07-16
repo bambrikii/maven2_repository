@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                          http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+	<pluginGroups>
+		<pluginGroup>org.apache.tomcat.maven</pluginGroup>
+	</pluginGroups>
+
+	<servers>
+		<server>
+			<id>repository-1</id>
+			<username>username</username>
+			<privateKey>/path/.ssh/id_rsa</privateKey>
+			<passphrase>passphrase</passphrase>
+			<configuration>
+			</configuration>
+		</server>
+
+		<server>
+			<id>local-repository</id>
+			<username>username</username>
+			<password>password</password>
+			<configuration>
+			</configuration>
+		</server>
+
+		<server>
+			<id>localhost_tomcat8</id>
+			<username>username</username>
+			<password>password</password>
+		</server>
+
+	</servers>
+
+	<profiles>
+		<profile>
+			<id>central-profile</id>
+			<name>Central Profile</name>
+			<repositories>
+				<repository>
+					<id>central</id>
+					<name>Central Repository</name>
+					<url>http://repo.maven.apache.org/maven2</url>
+					<releases><enabled>true</enabled></releases>
+					<snapshots><enabled>true</enabled></snapshots>
+				</repository>
+			</repositories>
+		</profile>
+		<profile>
+			<id>profile-1</id>
+			<name>Profile 1</name>
+			<repositories>
+				<repository>
+					<id>repository-1</id>
+					<name>Repository 1</name>
+					<url>scp://user@host:/path/.m2/repository</url>
+					<layout>default</layout>
+					<releases>
+						<enabled>true</enabled>
+						<updatePolicy>always</updatePolicy>
+						<checksumPolicy>warn</checksumPolicy>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+						<updatePolicy>never</updatePolicy>
+						<checksumPolicy>fail</checksumPolicy>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
+	<activeProfiles>
+		<activeProfile>central-profile</activeProfile>
+		<activeProfile>profile-1</activeProfile>
+	</activeProfiles>
+
+</settings>
